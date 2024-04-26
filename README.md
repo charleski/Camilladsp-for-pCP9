@@ -105,6 +105,7 @@ sudo cp -f bootlocal.sh /opt
 
 **6)** Install the extensions using the script provided.
 ```
+chmod a+x install.sh
 ./install.sh
 ```
 
