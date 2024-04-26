@@ -19,13 +19,19 @@ https://docs.picoreplayer.org/how-to/access_pcp_via_ssh/
 tce-load -wi nano git python3.11
 ```
 
-**2)** Download the repository files
+**2)** Install the extensions using the script provided. This will also make a backup of asound.conf and bootlocal.sh just in case.
+```
+chmod a+x install.sh
+./install.sh
+```
+
+**3)** Download the repository files
 ```
 git clone https://github.com/charleski/Camilladsp-for-pCP9.git
 cd Camilladsp-for-pCP9
 ```
 
-**3)** Find out the card number for your audio output. These instructions assume you're configuring a simple stereo system. More complex multi-channel cross-over outputs will require more complex configuration.
+**4)** Find out the card number for your audio output. These instructions assume you're configuring a simple stereo system. More complex multi-channel cross-over outputs will require more complex configuration.
 ```
 aplay -l
 ```
@@ -48,7 +54,7 @@ card 1: AmplifierAK4493 [AP90 Amplifier(AK4493)], device 0: USB Audio [USB Audio
 ```
 In this case the desired audio output is card 1, subdevice 0.
 
-**4)** Edit asound.conf (if necessary) to point to the desired audio output. An example asound.conf is provided to serve as a template.
+Edit asound.conf (if necessary) to point to the desired audio output. An example asound.conf is provided to serve as a template.
 ```
 nano asound.conf
 ```
@@ -103,20 +109,14 @@ A sample bootlocal.sh is provided as a template. If you don't require any other 
 sudo cp -f bootlocal.sh /opt
 ```
 
-**6)** Install the extensions using the script provided.
-```
-chmod a+x install.sh
-./install.sh
-```
-
-**7)** Delete the install directory, then backup and reboot
+**6)** Delete the install directory, then backup and reboot
 ```
 cd /home/tc
 rm -rf Camilladsp-for-pCP9
 sudo pcp br
 ```
 
-**8)** Tell squeezelite to send its audio to camilladsp. You can change this in the Squeezelite Settings tab of the pCP web interface:
+**7)** Tell squeezelite to send its audio to camilladsp. You can change this in the Squeezelite Settings tab of the pCP web interface:
 
 ![SetupSqueezelite](https://github.com/charleski/Camilladsp-for-pCP9/assets/4446874/bc8305cf-5363-418b-8461-82d46b98cc10)
 
