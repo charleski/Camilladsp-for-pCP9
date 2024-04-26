@@ -1,0 +1,16 @@
+---
+camilla_host: "0.0.0.0"
+camilla_port: 1234
+bind_address: "0.0.0.0"
+port: 5005
+ssl_certificate: null
+ssl_private_key: null
+config_dir: "/home/tc/camilladsp/configs"
+coeff_dir: "/home/tc/camilladsp/coeffs"
+default_config: "/home/tc/camilladsp/configs/camilladsp.yml"
+statefile_path: "/home/tc/camilladsp/statefile.yml"
+log_file: "/home/tc/camilladsp/camilladsp.log"
+on_set_active_config: /opt/camillagui/processTemplate.sh {}
+on_get_active_config: null
+supported_capture_types: null
+supported_playback_types: null
