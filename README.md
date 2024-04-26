@@ -16,7 +16,7 @@ https://docs.picoreplayer.org/how-to/access_pcp_via_ssh/
 # Installation instructions
 **1)** Install modules that will be required
 ```
-tce-load -wi nano git alsa-utils
+tce-load -wi nano git
 ```
 
 **2)** Download the repository files
