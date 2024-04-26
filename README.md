@@ -104,7 +104,7 @@ sudo cp -r bootlocal.sh /opt
 
 **6)** Install the extensions using the script provided.
 ```
-install.sh
+./install.sh
 ```
 
 **7)** Tell squeezelite to send its audio to camilladsp. You can change this in the Squeezelite Settings tab of the pCP web interface:
