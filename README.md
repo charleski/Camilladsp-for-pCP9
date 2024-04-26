@@ -97,9 +97,10 @@ Then copy asound.conf over the default version:
 sudo cp -f asound.conf /etc
 ```
 
-**5)** Change bootlocal.sh to get camillagui running during startup. A sample bootlocal.sh is provided as a template. If you don't require any other commands to be run at boot then you can just copy this over the default.
+**5)** Change bootlocal.sh to get camillagui running during startup. 
+A sample bootlocal.sh is provided as a template. If you don't require any other commands to be run at boot then you can just copy this over the default. If you do need other commands these can be tacked on at the end.
 ```
-sudo cp -r bootlocal.sh /opt
+sudo cp -f bootlocal.sh /opt
 ```
 
 **6)** Install the extensions using the script provided.
