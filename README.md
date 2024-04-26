@@ -109,8 +109,10 @@ chmod a+x install.sh
 ./install.sh
 ```
 
-**7)** Backup and reboot
+**7)** Delete the install directory, then backup and reboot
 ```
+cd /home/tc
+rm -rf Camilladsp-for-pCP9
 sudo pcp br
 ```
 
