@@ -109,14 +109,15 @@ chmod a+x install.sh
 ./install.sh
 ```
 
-**7)** Tell squeezelite to send its audio to camilladsp. You can change this in the Squeezelite Settings tab of the pCP web interface:
-
-![SetupSqueezelite](https://github.com/charleski/Camilladsp-for-pCP9/assets/4446874/bc8305cf-5363-418b-8461-82d46b98cc10)
-
-**8)** Backup and reboot
+**7)** Backup and reboot
 ```
 pcp br
 ```
+
+**8)** Tell squeezelite to send its audio to camilladsp. You can change this in the Squeezelite Settings tab of the pCP web interface:
+
+![SetupSqueezelite](https://github.com/charleski/Camilladsp-for-pCP9/assets/4446874/bc8305cf-5363-418b-8461-82d46b98cc10)
+
 # Usage
 The camilladsp web interface can now be accessed through a browser at  
 http://pcp.local:5005  
