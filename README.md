@@ -19,16 +19,16 @@ https://docs.picoreplayer.org/how-to/access_pcp_via_ssh/
 tce-load -wi nano git python3.11
 ```
 
-**2)** Install the extensions using the script provided. This will also make a backup of asound.conf and bootlocal.sh just in case.
-```
-chmod a+x install.sh
-./install.sh
-```
-
-**3)** Download the repository files
+**2)** Download the repository files
 ```
 git clone https://github.com/charleski/Camilladsp-for-pCP9.git
 cd Camilladsp-for-pCP9
+```
+
+**3)** Install the extensions using the script provided. This will also make a backup of asound.conf and bootlocal.sh just in case.
+```
+chmod a+x install.sh
+./install.sh
 ```
 
 **4)** Find out the card number for your audio output. These instructions assume you're configuring a simple stereo system. More complex multi-channel cross-over outputs will require more complex configuration.
