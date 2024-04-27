@@ -7,6 +7,9 @@ https://github.com/Lykkedk/SuperPlayer-v8.0.0---SamplerateChanger-v1.0.0
 This project uses the modified alsa plugin coded by scripple  
 https://github.com/scripple/alsa_cdsp
 
+I've opened a support thread for this project over at DIYAudio:
+https://www.diyaudio.com/community/threads/camilladsp-2-for-picoreplayer-9.412118
+
 All files have been packaged up so this install will work the 'tinycore way', without relying on persistence through a static partition. 
 The alsa plugin has been compiled to work on a 64-bit system. If using a 32-bit version of pCP 9 then you will need to recompile it for your architecture.
 
