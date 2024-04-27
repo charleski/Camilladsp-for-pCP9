@@ -32,44 +32,95 @@ chmod a+x *.sh
 ./install_camilla.sh
 ```
 
-**4)** Find out the card number for your audio output. These instructions assume you're configuring a simple stereo system. More complex multi-channel cross-over outputs will require more complex configuration.
-```
-aplay -l
-```
-Example output:
-```
-**** List of PLAYBACK Hardware Devices ****
-card 0: Headphones [bcm2835 Headphones], device 0: bcm2835 Headphones [bcm2835 Headphones]
-  Subdevices: 8/8
-  Subdevice #0: subdevice #0
-  Subdevice #1: subdevice #1
-  Subdevice #2: subdevice #2
-  Subdevice #3: subdevice #3
-  Subdevice #4: subdevice #4
-  Subdevice #5: subdevice #5
-  Subdevice #6: subdevice #6
-  Subdevice #7: subdevice #7
-card 1: AmplifierAK4493 [AP90 Amplifier(AK4493)], device 0: USB Audio [USB Audio]
-  Subdevices: 0/1
-  Subdevice #0: subdevice #0
-```
-In this case the desired audio output is card 1, subdevice 0.
+**4)** Find out the card name for your audio output. These instructions assume you're configuring a simple stereo system. More complex multi-channel cross-over outputs will require more complex configuration.
 
-Edit asound.conf (if necessary) to point to the desired audio output. An example asound.conf is provided to serve as a template.
+The audio output card can be specified by using either its number or its name. Unfortunately, it's possible for a card's number to vary between reboots, especially on a fresh system (the reasons for this are buried in the fine details of Alsa). So the bullet-proof way to point to a card is by using its name, and this is the method described here.
+These instructions are based on using a DAC connected via USB, but should also be applicable to audio hats.
+
+To find your card's name, enter
+```
+aplay -L | grep :CARD
+```
+Which will produce an output like this:
+```
+hw:CARD=Headphones,DEV=0
+plughw:CARD=Headphones,DEV=0
+default:CARD=Headphones
+sysdefault:CARD=Headphones
+dmix:CARD=Headphones,DEV=0
+hw:CARD=AmplifierAK4493,DEV=0
+plughw:CARD=AmplifierAK4493,DEV=0
+default:CARD=AmplifierAK4493
+sysdefault:CARD=AmplifierAK4493
+front:CARD=AmplifierAK4493,DEV=0
+surround21:CARD=AmplifierAK4493,DEV=0
+surround40:CARD=AmplifierAK4493,DEV=0
+surround41:CARD=AmplifierAK4493,DEV=0
+surround50:CARD=AmplifierAK4493,DEV=0
+surround51:CARD=AmplifierAK4493,DEV=0
+surround71:CARD=AmplifierAK4493,DEV=0
+iec958:CARD=AmplifierAK4493,DEV=0
+dmix:CARD=AmplifierAK4493,DEV=0
+```
+The card name is the text between 'CARD=' and the first comma. So in this case the desired card name is AmplifierAK4493.
+
+Edit asound.conf to point to the desired audio output. An example asound.conf is provided to serve as a template.
 ```
 nano asound.conf
 ```
+Here is the asound.conf provided:
 ```
 #    --- sound_out is the real hardware card ---
 pcm.sound_out {
 type hw
-card 1  <-- change to the number of your card
+card 1  <-- change to the name of your card
 device 0  <-- change to the subdevice if needed
 }
 
 ctl.sound_out {
 type hw
-card 1  <-- change to the number of your card
+card 1  <-- change to the name of your card
+}
+
+#   --- CamillaDSP with Seashell's alsa-plugin ---
+# Howto here : https://github.com/scripple/alsa_cdsp
+pcm.camilladsp {
+    type cdsp
+      cpath "/usr/local/bin/camilladsp"
+      config_in "/home/tc/camilladsp/configs/alsa_cdsp_template.yml"
+      config_out "/home/tc/camilladsp/configs/camilladsp.yml"
+      cargs [
+        -o "/home/tc/camilladsp/camilladsp.log"
+        -l error
+        -p "1234"
+        -s "/home/tc/camilladsp/statefile.yml"
+      ]
+      channels 2
+      rates = [
+        44100
+        48000
+        88200
+        96000
+        176400
+        192000
+        352800
+        384000
+      ]
+      extra_samples 0
+}
+```
+This is changed to
+```
+#    --- sound_out is the real hardware card ---
+pcm.sound_out {
+type hw
+card AmplifierAK4493
+device 0
+}
+
+ctl.sound_out {
+type hw
+card AmplifierAK4493
 }
 
 #   --- CamillaDSP with Seashell's alsa-plugin ---
@@ -118,6 +169,9 @@ sudo pcp br
 **8)** Tell squeezelite to send its audio to camilladsp. You can change this in the Squeezelite Settings tab of the pCP web interface:
 
 ![SetupSqueezelite](https://github.com/charleski/Camilladsp-for-pCP9/assets/4446874/bc8305cf-5363-418b-8461-82d46b98cc10)
+
+**9)** After squeezelite automatically restarts you can check that camilladsp is working by opening the gui interface at http://pcp.local:5005 or http://[ip address of your raspberry pi]:5005 You should see this on 
+
 
 # Usage
 The camilladsp web interface can now be accessed through a browser at  
