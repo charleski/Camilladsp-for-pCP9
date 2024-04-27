@@ -25,10 +25,10 @@ git clone https://github.com/charleski/Camilladsp-for-pCP9.git
 cd Camilladsp-for-pCP9
 ```
 
-**3)** Install the extensions using the script provided. This will also make a backup of asound.conf and bootlocal.sh just in case.
+**3)** Install the extensions using the script provided.
 ```
-chmod a+x install.sh
-./install.sh
+chmod a+x *.sh
+./install_camilla.sh
 ```
 
 **4)** Find out the card number for your audio output. These instructions assume you're configuring a simple stereo system. More complex multi-channel cross-over outputs will require more complex configuration.
@@ -98,25 +98,23 @@ pcm.camilladsp {
       extra_samples 0
 }
 ```
-Then copy asound.conf over the default version:
-```
-sudo cp -f asound.conf /etc
-```
 
 **5)** Change bootlocal.sh to get camillagui running during startup. 
-A sample bootlocal.sh is provided as a template. If you don't require any other commands to be run at boot then you can just copy this over the default. If you do need other commands these can be tacked on at the end.
+A sample bootlocal.sh is provided as a template. If you don't require any other commands to be run at boot then you can just copy this over the default. If you do need other commands these can be tacked on at the end using nano.
+
+**6)** Install the boot files using the script provided. This will also make backups in your home directory. Don't simply try to copy the files, as they won't have the correct permissions.
 ```
-sudo cp -f bootlocal.sh /opt
+sudo ./install_boot.sh
 ```
 
-**6)** Delete the install directory, then backup and reboot
+**7)** Delete the install directory, then backup and reboot
 ```
 cd /home/tc
 rm -rf Camilladsp-for-pCP9
 sudo pcp br
 ```
 
-**7)** Tell squeezelite to send its audio to camilladsp. You can change this in the Squeezelite Settings tab of the pCP web interface:
+**8)** Tell squeezelite to send its audio to camilladsp. You can change this in the Squeezelite Settings tab of the pCP web interface:
 
 ![SetupSqueezelite](https://github.com/charleski/Camilladsp-for-pCP9/assets/4446874/bc8305cf-5363-418b-8461-82d46b98cc10)
 
