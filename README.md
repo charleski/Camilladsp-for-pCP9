@@ -12,6 +12,7 @@ The alsa plugin has been compiled to work on a 64-bit system. If using a 32-bit 
 
 You will need to connect to your Pi through SSH to enter these commands, as described in the pCP docs:
 https://docs.picoreplayer.org/how-to/access_pcp_via_ssh/
+Once you have SSH access, simply copy and paste the commands below line-by-line into the terminal. The only step that may require more user input is step 4, where you need to set the right output for the DAC attached to your Pi.
 
 # Installation instructions
 **1)** Install modules that will be required
