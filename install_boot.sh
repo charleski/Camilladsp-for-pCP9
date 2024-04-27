@@ -4,6 +4,9 @@
 # Install script for boot files. Ensure correct permissions
 #
 
+cp /etc/asound.conf /home/tc
+cp /opt/bootlocal.sh /home/tc
+
 chown root:root asound.conf
 chmod 744 asound.conf
 cp -f asound.conf /etc/asound.conf
