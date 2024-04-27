@@ -170,7 +170,7 @@ sudo pcp br
 
 ![SetupSqueezelite](https://github.com/charleski/Camilladsp-for-pCP9/assets/4446874/bc8305cf-5363-418b-8461-82d46b98cc10)
 
-**9)** After squeezelite automatically restarts you can check that camilladsp is working by opening the gui interface at http://pcp.local:5005 or http://[ip address of your raspberry pi]:5005 . You should see this on the left side:
+**9)** After squeezelite automatically restarts you can check that camilladsp is working by opening the gui interface at http://pcp.local:5005 or http://[ip address of your raspberry pi]:5005 . You should see this on the left side:  
 ![CamOK](https://github.com/charleski/Camilladsp-for-pCP9/assets/4446874/19b09476-c225-49a6-bd33-29acd2ba737b)
 
 
