@@ -12,7 +12,7 @@ chmod 744 asound.conf
 cp -f asound.conf /etc/asound.conf
 
 chown root:staff bootlocal.sh
-chmod 755 bootlocal.sh
+chmod 775 bootlocal.sh
 cp -f bootlocal.sh /opt/bootlocal.sh
 
 rm -f asound.conf
