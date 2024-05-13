@@ -220,3 +220,23 @@ You can edit your config in the gui (e.g. change filter values etc.). After perf
 If you want your edits to persist after a reboot then don't forget to do a backup of pCP before rebooting or shutting down, either through the Backup button on the main pCP page or by pcp bu through SSH.
 
 You will find a directory named camillagui_config in /home/tc/camilladsp. This contains camillagui.yml and gui_config.yml, which may be edited to alter the behaviour of the gui as described in the camillagui docs. The only caveat is that the line on_set_active_config: in camillagui.yml must point to a command that will call /opt/camillagui/processTemplate.sh [path to active config], though you can alter it to include other commands as well.
+
+# Note on updates
+After performing an insitu update of pCP the bootlocal.sh file will need to be altered, since the pCPstart section is reset to the default version. 
+The lines
+```
+#pCPstart------
+/usr/local/etc/init.d/pcp_startup.sh 2>&1 | tee -a /var/log/pcp_boot.log
+#pCPstop------
+```
+need to be changed to 
+```
+#pCPstart------
+/usr/local/etc/init.d/pcp_startup.sh >> /var/log/pcp_boot.log 2>&1
+#pCPstop------
+```
+This can be done manually with
+```
+sudo nano /opt/bootlocal.sh
+```
+This is because bootlocal.sh gets hung up on the tee command even after the pcp_startup.sh script finishes. 
