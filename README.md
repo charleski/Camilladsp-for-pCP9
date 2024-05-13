@@ -155,7 +155,7 @@ pcm.camilladsp {
 ```
 
 **5)** Change bootlocal.sh to get camillagui running during startup. 
-A sample bootlocal.sh is provided as a template. If you don't require any other commands to be run at boot then you can just copy this over the default. If you do need other commands these can be tacked on at the end using nano. 
+A sample bootlocal.sh is provided as a template. If you don't require any other commands to be run at boot then you can just copy this over the default. If you do need other commands these can be tacked on at the end using nano.  
 **Warning** If you are running pCP *only* as a squeezelite player (i.e. LMS isn't installed and run on boot) then the standard pcp startup script will get confused by the virtual alsa device we are using and will fail to start squeezelite on boot. You can fix this by adding the line
 ```
 pcp slr
