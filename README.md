@@ -215,16 +215,33 @@ devices:
     type: Alsa
 ...
 ```
-For almost all modern high quality DACs the output format should be S32LE, but yoou can change this if needed.
+For almost all modern high quality DACs the output format should be S32LE, but you can change this if needed.
 
 You can now change the active config in the gui by going to the Files tab and clicking on the star icon next to your desired config:
-![Camillagui](https://github.com/charleski/Camilladsp-for-pCP9/assets/4446874/c7c2741c-a8cb-4f2f-8748-a1fff383519e)
+![Camillagui](https://github.com/charleski/Camilladsp-for-pCP9/assets/4446874/c7c2741c-a8cb-4f2f-8748-a1fff383519e)  
 As shown, you will see two extra configs in the directory: camilladsp.yml and alsa_cdsp_template.yml. Leave these alone, as they are generated automatically and are used to facilitate the automatic samplerate switching.
 
 You can edit your config in the gui (e.g. change filter values etc.). After performing the edits go the the Files tab and save the config out to a file - either to a new file or by clicking the floppy disk icon next to the star for an existing config. Then click on the star icon to set it active. By setting a config to be active you are also updating the template used for the samplerate switcher. If you simply click the 'Apply to DSP' or 'Apply to DSP and Save' buttons then the template won't be updated and your edits will be lost if the input rate changes and the alsa plugin regenerates the config to use.
 If you want your edits to persist after a reboot then don't forget to do a backup of pCP before rebooting or shutting down, either through the Backup button on the main pCP page or by pcp bu through SSH.
 
 You will find a directory named camillagui_config in /home/tc/camilladsp. This contains camillagui.yml and gui_config.yml, which may be edited to alter the behaviour of the gui as described in the camillagui docs. The only caveat is that the line on_set_active_config: in camillagui.yml must point to a command that will call /opt/camillagui/processTemplate.sh [path to active config], though you can alter it to include other commands as well.
+
+## Resampling
+Although scripple's alsa module allows automatic modification of config files to match the samplerate of different files, there may be instances in which you want to use CamillaDSP's built-in resampler instead. An example of such a case would be the use of FIR filters convolving an impulse response which is only available at a single samplerate (such as the ShanonPearce BRIR's: https://github.com/ShanonPearce/ASH-Listening-Set). One way around this is to resample the impulse response to match all the possible samplerates, name the files accordingly and set the filename in the config so the correct one is used (e.g. BRIR_R32_C1_E0_A-30_$samplerate$), but then you end up littering your coeffs directory with needless copies. It's more efficient to use CamillaDSP's high-quality resampler instead and turn off the output samplerate switching for such configs.
+
+This can be done by including the following lines in your config file:
+```
+devices:
+  ...
+  capture_samplerate: [some number, e.g. 44100]
+  ...
+  resampler:
+    type: AsyncSinc
+    profile: Balanced
+  samplerate: 44100
+```
+Note that the samplerate given in the final "samplerate:" parameter **must** match the samplerate of your IR file. This is the rate CamillaDSP will use to output your audio. The actual number given in the "capture_samplerate:" parameter doesn't  matter and will be modified by the alsa module to match the samplerate of your audio file, but this line must be present and it can't be null. Once you've prepared the config and saved it to your configs directory, simply make it active in camillagui by clicking the star button (as shown above) and the template processor will detect the use of resampling and create the proper template file for the alsa module.
+
 
 # Note on updates
 After performing an insitu update of pCP the bootlocal.sh file will need to be altered, since the pCPstart section is reset to the default version. 
