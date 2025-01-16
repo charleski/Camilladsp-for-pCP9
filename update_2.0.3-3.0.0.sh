@@ -12,5 +12,5 @@ sed -i 's/camilladsp64-2.\d.\d/camilladsp64-3.0.0' /etc/sysconfig/tcedir/onboot.
 sed -i 's/camillagui-2.\d.\d/camillagui-3.0.0' /etc/sysconfig/tcedir/onboot.lst
 
 cd ..
-rm -f Camilladsp-for-pCP9
+rm -rf Camilladsp-for-pCP9
 
