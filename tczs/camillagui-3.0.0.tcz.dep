@@ -2,7 +2,7 @@ py3.11-websocket_client-1.7.0.tcz
 py3.11-jsonschema-4.21.1.tcz
 py3.11-aiohttp-3.9.5.tcz
 py3.11-pyYAML-6.0.1.tcz
-py3.11-pycamilladsp-2.0.2.tcz
-py3.11-pycamilladsp-plot-2.0.0.tcz
+py3.11-pycamilladsp-3.0.0.tcz
+py3.11-pycamilladsp-plot-3.0.0.tcz
 alsa-mod-for-camilla.tcz
 
