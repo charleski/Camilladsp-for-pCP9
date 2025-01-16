@@ -8,8 +8,8 @@ git checkout
 
 cp -f tczs/* /etc/sysconfig/tcedir/optional
 
-sed -i 's/camilladsp64-2.\d.\d/camilladsp64-3.0.0' /etc/sysconfig/tcedir/onboot.lst
-sed -i 's/camillagui-2.\d.\d/camillagui-3.0.0' /etc/sysconfig/tcedir/onboot.lst
+sed -i "s/camilladsp64-2\.[[:digit:]]\.[[:digit:]]/camilladsp64-3.0.0/g" /etc/sysconfig/tcedir/onboot.lst
+sed -i "s/camillagui-2\.[[:digit:]]\.[[:digit:]]/camillagui-3.0.0/g" /etc/sysconfig/tcedir/onboot.lst
 
 cd ..
 rm -rf Camilladsp-for-pCP9
