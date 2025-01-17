@@ -185,7 +185,7 @@ sudo pcp br
 ![CamOK](https://github.com/user-attachments/assets/4b25878b-c44e-4606-9c4f-f98244ad2d4a)
 
 # Updating to CamillaDSP 3
-The basic file update can be simply performed by opening an SSH terminal and emtering the following commands:
+The basic file update can be simply performed by opening an SSH terminal and entering the following commands:
 ```
 mkdir tmp
 cd tmp
