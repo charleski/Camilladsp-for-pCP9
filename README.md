@@ -202,7 +202,7 @@ gui_config_file: "/home/tc/camilladsp/camillagui_config/gui-config.yml"
 ```
 Note that this uses the absolute path explicitly.
 
-<ins>Be warned:</ins> Subtle but important changes have been made to the format of the config files that CamillaDSP uses. Any but the most simple configs from version 2 will probably not work for version 3. There is a facility in the gui to import old config files and convert them - go to the Files section, click New blank config then Import config and select all the elements in the old config for import. This is a little laborious if your have a lot of configs to convert, so I've made a post in the CamillaDSP thread on diyaudio that covers the issues I've discovered so far.
+<ins>Be warned:</ins> Subtle but important changes have been made to the format of the config files that CamillaDSP uses. Any but the most simple configs from version 2 will probably not work for version 3. There is a facility in the gui to import old config files and convert them - go to the Files section, click New blank config then Import config and select all the elements in the old config for import. This is a little laborious if you have a lot of configs to convert, so I've made a post in the CamillaDSP thread on diyaudio that covers the issues I've discovered so far.
 
 # Usage
 The camilladsp web interface can now be accessed through a browser at  
