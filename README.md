@@ -1,5 +1,8 @@
 # Camilladsp-for-pCP9
-Files and configuration required to run camilladsp 2 on pCP 9 with auto samplerate switching and integration of the SR switcher with the camilladsp GUI.
+This project is now updated to use CamillaDSP 3, which was recently released.
+Please see the separate section below for instructions to update an existing installation.
+
+Files and configuration required to run camilladsp 3 on pCP 9 with auto samplerate switching and integration of the SR switcher with the camilladsp GUI.
 This will not work on previous verions of picoreplayer.
 
 This project was heavily influenced by Lykkedk's work on his 'SuperPlayer'
@@ -179,8 +182,27 @@ sudo pcp br
 ![SetupSqueezelite](https://github.com/charleski/Camilladsp-for-pCP9/assets/4446874/bc8305cf-5363-418b-8461-82d46b98cc10)
 
 **9)** After squeezelite automatically restarts you can check that camilladsp is working by opening the gui interface at http://pcp.local:5005 or http://[ip address of your raspberry pi]:5005 . You should see this on the left side:  
-![CamOK](https://github.com/charleski/Camilladsp-for-pCP9/assets/4446874/19b09476-c225-49a6-bd33-29acd2ba737b)
+![CamOK](https://github.com/user-attachments/assets/4b25878b-c44e-4606-9c4f-f98244ad2d4a)
 
+# Updating to CamillaDSP 3
+The basic file update can be simply performed by opening an SSH terminal and emtering the following commands:
+```
+mkdir tmp
+cd tmp
+wget https://raw.githubusercontent.com/charleski/Camilladsp-for-pCP9/refs/heads/main/update_2.0.3-3.0.0.sh
+chmod a+x *.sh
+./update_2.0.3-3.0.0.sh
+cd ..
+rm -rf tmp
+```
+
+If you have edited the gui-config.yml file (found in camilladsp/camillagui_config) and want to retain your custom shortcuts, then you will need to edit camillagui.yml (also found in the camillagui_config directory) and add the following line:
+```
+gui_config_file: "/home/tc/camilladsp/camillagui_config/gui-config.yml"
+```
+Note that this uses the absolute path explicitly.
+
+<ins>Be warned:</ins> Subtle but important changes have been made to the format of the config files that CamillaDSP uses. Any but the most simple configs from version 2 will probably not work for version 3. There is a facility in the gui to import old config files and convert them - go to the Files section, click New blank config then Import config and select all the elements in the old config for import. This is a little laborious if your have a lot of configs to convert, so I've made a post in the CamillaDSP thread on diyaudio that covers the issues I've discovered so far.
 
 # Usage
 The camilladsp web interface can now be accessed through a browser at  
@@ -197,13 +219,13 @@ devices:
   ...
   capture:
     ...
-    filename: /dev/stdin
     format: ...
+    labels:
     ...
-    type: File
+    type: Stdin
 ...
 ```
-I.e. the input type must be set to File with a filename /dev/stdin and the capture format line must come immediately after the filename. This ordering is true by default when creating a new config in the gui and so you shouldn't need to worry about it. In almost all cases your capture format will be S32LE, but as scripple's plugin allows this to be varied I've retained that functionality in case anyone needs it.  
+I.e. the input type must be set to pipe data in from stdin. In almost all cases your capture format will be S32LE, but scripple's plugin supports the use of varying formats and I've retained that functionality. If your configs use different capture formats then the capture format line must come immediately before the labels line as shown. This ordering is true by default when creating a new config in the gui and so you shouldn't need to worry about it. This is, I admit, a bit of a kludge, but is needed to ensure that only the capture format is tokenised.  
 b) The devices: playback: section needs to route output to the Alsa device sound_out:
 ```
 devices:
