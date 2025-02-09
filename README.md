@@ -1,8 +1,8 @@
-# Camilladsp-for-pCP9
+# Camilladsp-for-pCP9 (and later)
 This project is now updated to use CamillaDSP 3, which was recently released.
 Please see the separate section below for instructions to update an existing installation.
 
-Files and configuration required to run camilladsp 3 on pCP 9 with auto samplerate switching and integration of the SR switcher with the camilladsp GUI.
+Files and configuration required to run camilladsp 3 on pCP version 9 and above with auto samplerate switching and integration of the SR switcher with the camilladsp GUI.
 This will not work on previous verions of picoreplayer.
 
 This project was heavily influenced by Lykkedk's work on his 'SuperPlayer'
